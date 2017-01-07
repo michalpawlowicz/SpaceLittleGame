@@ -11,6 +11,7 @@ import model.CouldNotCreateGameWindow;
 import model.engine.*;
 import model.engine.navigation.AbstractCKeysEvent;
 import model.engine.navigation.KeysListenerThread;
+import model.gameobjects.EnemyFactory;
 import model.gameobjects.EnemyOne;
 import model.gameobjects.Pixel;
 import model.scenes.EndScene;
@@ -98,8 +99,7 @@ public class Aplication {
                 do{
                     tmp = (int)(Math.random() * defaultTerminalSize.getColumns());
                 } while(tmp + 5 > defaultTerminalSize.getColumns());
-                mainScene.addEnemy(new EnemyOne(
-                        new Pixel(tmp, 0), 1));
+                mainScene.addEnemy(EnemyFactory.createEnemy(new Pixel(tmp, 0)));
             }
             mainScene.detectCollisions();
             mainScene.updateBullets();

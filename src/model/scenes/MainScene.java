@@ -74,6 +74,7 @@ public class MainScene implements Scene {
         while (it.hasNext()){
             SceneObjects tmp = it.next();
             tmp.addIntToPositionY(((Enemy)tmp).getDirection());
+            ((Enemy) tmp).animateBody();
             if(tmp.getPosition().getY() > resolution.getRows()){
                 it.remove();
                 subPlayerLives(1);

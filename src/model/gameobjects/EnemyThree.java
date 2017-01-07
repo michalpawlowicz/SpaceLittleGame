@@ -3,37 +3,39 @@ package model.gameobjects;
 /**
  * Created by michal on 06.12.16.
  */
-public class EnemyThree implements SceneObjects {
-    private String bodyOne = "/o\\";
-    private String bodyTwo = "-o-";
+public class EnemyThree implements SceneObjects, Enemy {
+    private String bodyOne = "/ΔΔ\\";
+    private String bodyTwo = "-oo-";
+    private String body = bodyOne;
+    private Pixel position;
+    private final int height = 2;
+    private final int width = 4;
+    private int direction = 1;
 
-    @Override
+    public EnemyThree(Pixel position, int direction){
+        this.position = position;
+        this.direction = direction;
+    }
+
     public String getBody() {
-        return bodyOne;
+        return body;
     }
-
-    @Override
     public Pixel getPosition() {
-        return null;
+        return position;
     }
-
-    @Override
-    public void addIntToPositionX(int i) {
-
+    public void setPosition(Pixel position) { this.position = position; }
+    public void addIntToPositionX(int p){
+        position.addX(p);
     }
-
-    @Override
-    public void addIntToPositionY(int i) {
-
+    public void addIntToPositionY(int p){ position.addY(p); }
+    public int getHeight(){ return height; }
+    public int getWidth(){ return width; }
+    public int getDirection() {
+        return direction;
     }
-
-    @Override
-    public int getWidth() {
-        return 0;
-    }
-
-    @Override
-    public int getHeight() {
-        return 0;
+    public void animateBody() {
+        if(body.equals(bodyOne)){
+            body = bodyTwo;
+        } else body = bodyOne;
     }
 }

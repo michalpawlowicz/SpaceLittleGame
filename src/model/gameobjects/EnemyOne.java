@@ -5,7 +5,8 @@ package model.gameobjects;
  */
 public class EnemyOne implements SceneObjects, Enemy {
     private String bodyOne = "-,^,-";
-    private String bodyTwo = ",-,";
+    private String bodyTwo = "-,-,-";
+    private String body = bodyOne;
     private final int height = 2;
     private final int width = 5;
     private int direction = 1;
@@ -19,7 +20,7 @@ public class EnemyOne implements SceneObjects, Enemy {
 
     @Override
     public String getBody() {
-        return bodyOne;
+        return body;
     }
 
     @Override
@@ -33,10 +34,14 @@ public class EnemyOne implements SceneObjects, Enemy {
         position.addX(p);
     }
     public void addIntToPositionY(int p){ position.addY(p); }
-
-
-    @Override
     public int getDirection() {
         return direction;
+    }
+
+    @Override
+    public void animateBody() {
+        if(body.equals(bodyOne)){
+            body = bodyTwo;
+        } else body = bodyOne;
     }
 }

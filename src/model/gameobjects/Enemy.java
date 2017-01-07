@@ -5,4 +5,5 @@ package model.gameobjects;
  */
 public interface Enemy {
     public int getDirection();
+    public void animateBody();
 }
