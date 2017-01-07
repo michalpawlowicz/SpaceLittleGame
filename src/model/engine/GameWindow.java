@@ -13,16 +13,20 @@ import java.util.List;
  */
 public class GameWindow extends Screen {
     private TerminalSize defaultTerminalSize;
+    private Scene currentScene;
+
     public GameWindow(Terminal terminal) throws IOException {
         super(terminal);
         defaultTerminalSize = terminal.getTerminalSize();
     }
     public void startWindow(Scene scene) throws IOException {
+        currentScene = scene;
         this.startScreen();
         refreshGameWindow(scene);
     }
     public synchronized void refreshGameWindow(Scene scene) {
         this.clear();
+        currentScene = scene;
         List<List<SceneObjects>> res = scene.returnSceneObjects();
         for(List<SceneObjects> x: res){
             for(SceneObjects o: x){
@@ -34,4 +38,11 @@ public class GameWindow extends Screen {
     }
     public TerminalSize getDefaultTerminalSize(){ return defaultTerminalSize; }
     public void setDefaultTerminalSize(TerminalSize terminalSize){ this.defaultTerminalSize = terminalSize; }
+    public void refreshCurrentScene(){
+        try{
+            refreshGameWindow(currentScene);
+        } catch (NullPointerException e){
+            return;
+        }
+    }
 }

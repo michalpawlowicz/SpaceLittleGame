@@ -22,13 +22,16 @@ public class EndScene implements Scene {
     private boolean enterPressed = false;
     private TerminalSize resolution;
 
-    public EndScene(int score){
+    public EndScene(int score, TerminalSize resolution){
+        this.resolution = resolution;
         scoreText = new PlainText("Your score: " + Integer.toString(score));
         newGame = new Button("New game");
         quit = new Button("Quit");
         buttonBar = new ButtonBar(new Pixel(0,1));
         buttonBar.addButton(newGame);
         buttonBar.addButton(quit);
+        buttonBar.updateButtonsPosition(new Pixel(resolution.getColumns()/2-buttonBar.getWidth(),
+                resolution.getRows()/2-1));
         newGame.selected(true);
 
     }
@@ -52,4 +55,8 @@ public class EndScene implements Scene {
         this.enterPressed = enterPressed;
     }
     public boolean getEnterPressed(){ return enterPressed;}
+    public void resizeAction(TerminalSize terminalSize){
+        buttonBar.setPosition(new Pixel(terminalSize.getColumns()/2-buttonBar.getWidth(),
+                terminalSize.getRows()/2 - 1));
+    }
 }

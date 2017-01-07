@@ -69,12 +69,10 @@ public class Button implements SceneObjects, ButtonInterface{
     public int getHeight() {
         return 1;
     }
-
     @Override
     public Terminal.Color getColor() {
         return color;
     }
-
     @Override
     public boolean isSelected() {
         return isSelected;

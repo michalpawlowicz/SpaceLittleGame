@@ -15,7 +15,7 @@ public class PlayerObject implements SceneObjects {
     private final int height = 1;
     private final int width = 5;
     private int sconre = 0;
-    private int lives = 3;
+    private int lives = 5;
     private Terminal.Color color = Terminal.Color.BLUE;
 
     public PlayerObject(){ playerPosition = new Pixel(); }

@@ -21,11 +21,11 @@ public class MainScene implements Scene {
 
     public MainScene(TerminalSize resolution, Pixel playerPosition){
         player = new PlayerObject(playerPosition);
-        player.setLives(30);
+        player.setLives(5);
         bulletsGrid = new BulletsGrid();
         enemiesGrid = new EnemiesGrid();
         this.resolution = resolution;
-        bottomBar = new BottomBar(0, 3, new Pixel(0,0));
+        bottomBar = new BottomBar(0, player.getLives(), new Pixel(0,0));
     }
 
     @Override

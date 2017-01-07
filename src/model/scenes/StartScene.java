@@ -18,14 +18,17 @@ public class StartScene implements Scene {
     private ButtonBar buttonBar;
     private TerminalSize resolution;
 
-    public StartScene(Pixel position){
+    public StartScene(Pixel position, TerminalSize resolution){
+        this.resolution = resolution;
         this.position = position;
         newGame = new Button("Start");
         newGame.selected(true);
         quit = new Button("Quit");
-        buttonBar = new ButtonBar(new Pixel(0,0));
+        buttonBar = new ButtonBar();
         buttonBar.addButton(newGame);
         buttonBar.addButton(quit);
+        buttonBar.updateButtonsPosition(new Pixel(resolution.getColumns()/2-buttonBar.getWidth(),
+                resolution.getRows()/2-1));
     }
     @Override
     //synchronized?
@@ -44,5 +47,8 @@ public class StartScene implements Scene {
     public synchronized void setNextSelected(){buttonBar.setNextSelected();}
     public synchronized void setPrevSelected(){buttonBar.setPrevSelected();}
     public int getSelected(){ return buttonBar.getSelected(); }
-
+    public void resizeAction(TerminalSize terminalSize){
+        buttonBar.setPosition(new Pixel(terminalSize.getColumns()/2-buttonBar.getWidth(),
+                terminalSize.getRows()/2 - 1));
+    }
 }

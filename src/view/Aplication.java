@@ -27,9 +27,10 @@ public class Aplication {
     private MainScene mainScene;
     private StartScene startScene;
     private EndScene endScene;
+    private Terminal terminal;
 
     public Aplication() throws CouldNotCreateGameWindow{
-        Terminal terminal = new CustomTerminal().getTerminal();
+        terminal = new CustomTerminal().getTerminal();
         try {
             gameWindow = new GameWindow(terminal);
         } catch(IOException e){
@@ -41,7 +42,7 @@ public class Aplication {
             public void onResized(TerminalSize terminalSize) {
                 gameWindow.setDefaultTerminalSize(terminal.getTerminalSize());
                 defaultTerminalSize = terminal.getTerminalSize();
-                mainScene.resizeAction(terminalSize);
+                //mainScene.resizeAction(terminalSize);
             }
         });
     }
@@ -49,11 +50,23 @@ public class Aplication {
     public boolean startAplication() throws CouldNotStartWindowException{
 
         startScene = new StartScene(new Pixel(defaultTerminalSize.getColumns()/2,
-                defaultTerminalSize.getRows()/2));
+                defaultTerminalSize.getRows()/2), defaultTerminalSize);
+        terminal.addResizeListener(new Terminal.ResizeListener() {
+            public void onResized(TerminalSize terminalSize) {
+                startScene.resizeAction(terminalSize);
+                gameWindow.refreshCurrentScene();
+            }
+        });
 
         mainScene = new MainScene(gameWindow.getDefaultTerminalSize(),
                 new Pixel(gameWindow.getDefaultTerminalSize().getColumns() / 2,
                         gameWindow.getDefaultTerminalSize().getRows()-3));
+        terminal.addResizeListener(new Terminal.ResizeListener() {
+            @Override
+            public void onResized(TerminalSize terminalSize) {
+                mainScene.resizeAction(terminalSize);
+            }
+        });
 
         try{
             gameWindow.startWindow(startScene);
@@ -145,8 +158,14 @@ public class Aplication {
                 }
             }
         });
-        endScene = new EndScene(mainScene.getScore());
+        endScene = new EndScene(mainScene.getScore(), defaultTerminalSize);
         refreshScreen(endScene);
+        terminal.addResizeListener(new Terminal.ResizeListener() {
+            @Override
+            public void onResized(TerminalSize terminalSize) {
+                endScene.resizeAction(terminalSize);
+            }
+        });
         synchronized (endScene){
             try {
                 endScene.wait();
