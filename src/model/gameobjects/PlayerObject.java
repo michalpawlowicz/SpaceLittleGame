@@ -1,5 +1,7 @@
 package model.gameobjects;
 
+import com.googlecode.lanterna.terminal.Terminal;
+
 import java.awt.geom.Point2D;
 import java.util.Collections;
 import java.util.List;
@@ -14,6 +16,7 @@ public class PlayerObject implements SceneObjects {
     private final int width = 5;
     private int sconre = 0;
     private int lives = 3;
+    private Terminal.Color color = Terminal.Color.BLUE;
 
     public PlayerObject(){ playerPosition = new Pixel(); }
     public PlayerObject(Pixel position){ this.playerPosition = position; }
@@ -26,6 +29,12 @@ public class PlayerObject implements SceneObjects {
     public int getHeight() {
         return height;
     }
+
+    @Override
+    public Terminal.Color getColor() {
+        return color;
+    }
+
     public int getWidth() {
         return width;
     }
@@ -47,4 +56,5 @@ public class PlayerObject implements SceneObjects {
     public int getLives(){ return lives; }
     public void setLives(int lives){ this.lives = lives; }
     public void subLives(int s){ lives -= s; }
+    public void setPosition(Pixel playerPosition){ this.playerPosition = playerPosition; }
 }

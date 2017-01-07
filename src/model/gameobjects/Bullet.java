@@ -1,5 +1,7 @@
 package model.gameobjects;
 
+import com.googlecode.lanterna.terminal.Terminal;
+
 /**
  * Created by michal on 07.12.16.
  */
@@ -7,6 +9,7 @@ public class Bullet implements SceneObjects {
     private String body = "|";
     private Pixel position;
     private int direction = 1;
+    private Terminal.Color color = Terminal.Color.RED;
 
     public Bullet(Pixel position, int direction){ this.position = position;
         this.direction = direction;
@@ -40,6 +43,11 @@ public class Bullet implements SceneObjects {
     @Override
     public int getHeight() {
         return 1;
+    }
+
+    @Override
+    public Terminal.Color getColor() {
+        return color;
     }
 
     public int getDirection(){ return direction; }

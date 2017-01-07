@@ -27,10 +27,11 @@ public class GameWindow extends Screen {
         for(List<SceneObjects> x: res){
             for(SceneObjects o: x){
                 this.putString(o.getPosition().getX(), o.getPosition().getY(), o.getBody(),
-                        Terminal.Color.WHITE, Terminal.Color.BLACK);
+                        o.getColor(), Terminal.Color.BLACK);
             }
         }
         this.refresh();
     }
     public TerminalSize getDefaultTerminalSize(){ return defaultTerminalSize; }
+    public void setDefaultTerminalSize(TerminalSize terminalSize){ this.defaultTerminalSize = terminalSize; }
 }

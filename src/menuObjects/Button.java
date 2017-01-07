@@ -1,5 +1,6 @@
 package menuObjects;
 
+import com.googlecode.lanterna.terminal.Terminal;
 import model.gameobjects.Pixel;
 import model.gameobjects.PlainText;
 import model.gameobjects.SceneObjects;
@@ -12,6 +13,9 @@ public class Button implements SceneObjects, ButtonInterface{
     private String selectedText;
     private boolean isSelected = false;
     private Pixel position;
+    private Terminal.Color color = Terminal.Color.WHITE;
+
+
     public Button(String text){
         this.text = text;
         selectedText = "**" + text;
@@ -65,6 +69,12 @@ public class Button implements SceneObjects, ButtonInterface{
     public int getHeight() {
         return 1;
     }
+
+    @Override
+    public Terminal.Color getColor() {
+        return color;
+    }
+
     @Override
     public boolean isSelected() {
         return isSelected;

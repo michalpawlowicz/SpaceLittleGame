@@ -1,5 +1,6 @@
 package model.scenes;
 
+import com.googlecode.lanterna.terminal.TerminalSize;
 import menuObjects.Button;
 import menuObjects.ButtonBar;
 import model.gameobjects.Pixel;
@@ -19,6 +20,7 @@ public class EndScene implements Scene {
     private Button quit;
     private ButtonBar buttonBar;
     private boolean enterPressed = false;
+    private TerminalSize resolution;
 
     public EndScene(int score){
         scoreText = new PlainText("Your score: " + Integer.toString(score));
@@ -37,6 +39,12 @@ public class EndScene implements Scene {
         group.add(buttonBar.getButtonBarObjects());
         return group;
     }
+
+    @Override
+    public void setResolution(TerminalSize terminalSize) {
+        resolution = terminalSize;
+    }
+
     public synchronized void setNextSelected(){buttonBar.setNextSelected();}
     public synchronized void setPrevSelected(){buttonBar.setPrevSelected();}
     public int getSelected(){ return buttonBar.getSelected(); }

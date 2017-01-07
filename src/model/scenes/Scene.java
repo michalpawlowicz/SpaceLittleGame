@@ -1,5 +1,6 @@
 package model.scenes;
 
+import com.googlecode.lanterna.terminal.TerminalSize;
 import model.gameobjects.SceneObjects;
 import java.util.List;
 
@@ -8,4 +9,5 @@ import java.util.List;
  */
 public interface Scene {
     public List<List<SceneObjects>> returnSceneObjects();
+    public void setResolution(TerminalSize terminalSize);
 }

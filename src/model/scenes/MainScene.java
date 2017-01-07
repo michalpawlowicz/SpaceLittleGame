@@ -21,7 +21,7 @@ public class MainScene implements Scene {
 
     public MainScene(TerminalSize resolution, Pixel playerPosition){
         player = new PlayerObject(playerPosition);
-        player.setLives(3);
+        player.setLives(30);
         bulletsGrid = new BulletsGrid();
         enemiesGrid = new EnemiesGrid();
         this.resolution = resolution;
@@ -37,6 +37,11 @@ public class MainScene implements Scene {
         group.add(enemiesGrid.getlistOfEnemies());
         group.add(bottomBar.getListOfObjects());
         return group;
+    }
+
+    @Override
+    public void setResolution(TerminalSize terminalSize) {
+        resolution = terminalSize;
     }
     public void changlePlayerPosition(int i){
         if(i < 0 && player.getPosition().getX() + i > 0) {
@@ -103,4 +108,8 @@ public class MainScene implements Scene {
     public int getPlayerLives(){ return player.getLives(); }
     public void subPlayerLives(int l){ player.subLives(l); }
     public int getScore(){ return player.getScore(); }
+    public void resizeAction(TerminalSize terminalSize){
+        resolution = terminalSize;
+        player.setPlayerPosition(new Pixel(player.getPlayerPosition().getX(), terminalSize.getRows()-2));
+    }
 }

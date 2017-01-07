@@ -1,5 +1,7 @@
 package model.gameobjects;
 
+import com.googlecode.lanterna.terminal.Terminal;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -44,6 +46,12 @@ public class BottomBar implements SceneObjects{
     public int getHeight() {
         return height;
     }
+
+    @Override
+    public Terminal.Color getColor() {
+        return null;
+    }
+
     public void setScore(int score){ this.score = Integer.toString(score); }
     public void setLives(int lives){ this.currentLives = Integer.toString(lives); }
 }

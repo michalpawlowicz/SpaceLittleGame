@@ -1,5 +1,6 @@
 package model.scenes;
 
+import com.googlecode.lanterna.terminal.TerminalSize;
 import menuObjects.Button;
 import menuObjects.ButtonBar;
 import model.gameobjects.Pixel;
@@ -15,6 +16,7 @@ public class StartScene implements Scene {
     private Button newGame;
     private Button quit;
     private ButtonBar buttonBar;
+    private TerminalSize resolution;
 
     public StartScene(Pixel position){
         this.position = position;
@@ -32,6 +34,12 @@ public class StartScene implements Scene {
         list.add(buttonBar.getButtonBarObjects());
         return list;
     }
+
+    @Override
+    public void setResolution(TerminalSize terminalSize) {
+        resolution = terminalSize;
+    }
+
     //synchronized??
     public synchronized void setNextSelected(){buttonBar.setNextSelected();}
     public synchronized void setPrevSelected(){buttonBar.setPrevSelected();}

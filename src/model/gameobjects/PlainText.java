@@ -1,11 +1,15 @@
 package model.gameobjects;
 
+import com.googlecode.lanterna.terminal.Terminal;
+
 /**
  * Created by michal on 20.12.16.
  */
 public class PlainText implements SceneObjects {
     private String body;
     private Pixel position;
+    private Terminal.Color color = Terminal.Color.WHITE;
+
     public PlainText(String body, Pixel position){
         this.body = body;
         this.position = position;
@@ -41,5 +45,11 @@ public class PlainText implements SceneObjects {
     public int getHeight() {
         return 1;
     }
+
+    @Override
+    public Terminal.Color getColor() {
+        return color;
+    }
+
     public void setPosition(Pixel position){ this.position = position; }
 }

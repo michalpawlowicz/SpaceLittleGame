@@ -1,5 +1,7 @@
 package model.gameobjects;
 
+import com.googlecode.lanterna.terminal.Terminal;
+
 /**
  * Created by michal on 06.12.16.
  */
@@ -11,6 +13,7 @@ public class EnemyTwo implements SceneObjects, Enemy {
     private int height = 2;
     private int width = 5;
     private int direction;
+    private Terminal.Color color = Terminal.Color.YELLOW;
 
     public EnemyTwo(Pixel position, int direction){
         this.position = position;
@@ -29,6 +32,12 @@ public class EnemyTwo implements SceneObjects, Enemy {
     }
     public void addIntToPositionY(int p){ position.addY(p); }
     public int getHeight(){ return height; }
+
+    @Override
+    public Terminal.Color getColor() {
+        return color;
+    }
+
     public int getWidth(){ return width; }
     public int getDirection() {
         return direction;

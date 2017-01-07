@@ -29,13 +29,21 @@ public class Aplication {
     private EndScene endScene;
 
     public Aplication() throws CouldNotCreateGameWindow{
-        Terminal terminal = TerminalFacade.createTerminal();
+        Terminal terminal = new CustomTerminal().getTerminal();
         try {
             gameWindow = new GameWindow(terminal);
         } catch(IOException e){
             throw new CouldNotCreateGameWindow();
         }
         defaultTerminalSize = terminal.getTerminalSize();
+        terminal.addResizeListener(new Terminal.ResizeListener() {
+            @Override
+            public void onResized(TerminalSize terminalSize) {
+                gameWindow.setDefaultTerminalSize(terminal.getTerminalSize());
+                defaultTerminalSize = terminal.getTerminalSize();
+                mainScene.resizeAction(terminalSize);
+            }
+        });
     }
 
     public boolean startAplication() throws CouldNotStartWindowException{
