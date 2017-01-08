@@ -1,9 +1,13 @@
 package model.scenes;
 
 import com.googlecode.lanterna.terminal.TerminalSize;
+import model.engine.CouldNotFindSound;
+import model.engine.MySound;
 import model.engine.drawing.CollisionAction;
 import model.engine.drawing.Collisions;
 import model.gameobjects.*;
+
+import java.io.File;
 import java.util.*;
 import java.util.List;
 
@@ -18,18 +22,25 @@ public class MainScene implements Scene {
     private BulletsGrid bulletsGrid;
     private TerminalSize resolution;
     private BottomBar bottomBar;
+    private MySound mySound = null;
 
-    public MainScene(TerminalSize resolution, Pixel playerPosition){
+    public MainScene(TerminalSize resolution, Pixel playerPosition, MySound mySound){
         player = new PlayerObject(playerPosition);
         player.setLives(5);
         bulletsGrid = new BulletsGrid();
         enemiesGrid = new EnemiesGrid();
         this.resolution = resolution;
         bottomBar = new BottomBar(0, player.getLives(), new Pixel(0,0));
+        this.mySound = mySound;
+        try {
+            this.mySound.addSound(new File("./src/model/gameobjects/sounds/expolde.wav"), "expolde");
+            this.mySound.addSound(new File("./src/model/gameobjects/sounds/shoot.wav"), "shoot");
+        } catch (NullPointerException e){
+            System.err.println("Could not initialize sounds");
+        }
     }
 
     @Override
-    //why synchronized?
     public synchronized List<List<SceneObjects>> returnSceneObjects() {
         List<List<SceneObjects>> group = new LinkedList<List<SceneObjects>>();
         group.add(player.getPlayersList());
@@ -58,6 +69,11 @@ public class MainScene implements Scene {
     public void addPlayerShoot(){
         bulletsGrid.addBullet(new Pixel(player.getPlayerPosition().getX()+2,
                 player.getPlayerPosition().getY()-1), -1);
+        try {
+            mySound.playSound("shoot", 0.7);
+        } catch (CouldNotFindSound couldNotFindSound) {
+            System.err.println("Could not find sound");
+        }
     }
     public synchronized void updateBullets(){
         try{
@@ -100,6 +116,11 @@ public class MainScene implements Scene {
                     public void action() {
                         player.addPoints(1);
                         bottomBar.setScore(player.getScore());
+                        try {
+                            mySound.playSound("expolde", 1.5);
+                        } catch (CouldNotFindSound couldNotFindSound) {
+                            System.err.println("Could not find sound");
+                        }
                     }
                 }
         );

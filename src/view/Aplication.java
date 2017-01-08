@@ -2,8 +2,6 @@ package view;
 /**
  * Created by michal on 06.12.16.
  */
-
-import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.TerminalSize;
@@ -12,12 +10,13 @@ import model.engine.*;
 import model.engine.navigation.AbstractCKeysEvent;
 import model.engine.navigation.KeysListenerThread;
 import model.gameobjects.EnemyFactory;
-import model.gameobjects.EnemyOne;
 import model.gameobjects.Pixel;
 import model.scenes.EndScene;
 import model.scenes.MainScene;
 import model.scenes.Scene;
 import model.scenes.StartScene;
+
+import java.io.File;
 import java.io.IOException;
 
 public class Aplication {
@@ -28,8 +27,10 @@ public class Aplication {
     private StartScene startScene;
     private EndScene endScene;
     private Terminal terminal;
+    private MySound sounds;
 
     public Aplication() throws CouldNotCreateGameWindow{
+        sounds = new MySound();
         terminal = new CustomTerminal().getTerminal();
         try {
             gameWindow = new GameWindow(terminal);
@@ -58,9 +59,19 @@ public class Aplication {
             }
         });
 
+        //Initialize main music
+        sounds = new MySound();
+        sounds.init();
+        sounds.addMusic(new File("./src/model/gameobjects/sounds/music.wav"), "music");
+        try {
+            sounds.playMusic("music", 1.2);
+        } catch (CouldNotFindSound couldNotFindSound) {
+            System.out.print("Cound not play music");
+        }
+
         mainScene = new MainScene(gameWindow.getDefaultTerminalSize(),
                 new Pixel(gameWindow.getDefaultTerminalSize().getColumns() / 2,
-                        gameWindow.getDefaultTerminalSize().getRows()-3));
+                        gameWindow.getDefaultTerminalSize().getRows()-3), sounds);
         terminal.addResizeListener(new Terminal.ResizeListener() {
             @Override
             public void onResized(TerminalSize terminalSize) {
