@@ -14,6 +14,8 @@ public class EnemyThree implements SceneObjects, Enemy {
     private final int width = 4;
     private int direction = 1;
     private Terminal.Color color = Terminal.Color.YELLOW;
+    private int animationEveryNmove = 5;
+    private int currentAnimation = 0;
 
     public EnemyThree(Pixel position, int direction){
         this.position = position;
@@ -43,8 +45,15 @@ public class EnemyThree implements SceneObjects, Enemy {
         return direction;
     }
     public void animateBody() {
-        if(body.equals(bodyOne)){
-            body = bodyTwo;
-        } else body = bodyOne;
+        if(currentAnimation == animationEveryNmove) {
+            if (body.equals(bodyOne) && currentAnimation == animationEveryNmove) {
+                body = bodyTwo;
+                currentAnimation = 0;
+            } else {
+                body = bodyOne;
+                currentAnimation++;
+            }
+            currentAnimation = 0;
+        } else currentAnimation++;
     }
 }
