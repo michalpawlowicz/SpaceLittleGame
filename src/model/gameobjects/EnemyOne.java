@@ -7,12 +7,14 @@ import com.googlecode.lanterna.terminal.Terminal;
  */
 public class EnemyOne implements SceneObjects, Enemy {
     private String bodyOne = "-,^,-";
-    private String bodyTwo = "-,-,-";
+    private String bodyTwo = "_,-,_";
     private String body = bodyOne;
     private final int height = 2;
     private final int width = 5;
     private int direction = 1;
     private Terminal.Color color = Terminal.Color.YELLOW;
+    private int animationEveryNmove = 5;
+    private int currentAnimation = 0;
 
     private Pixel position;
 
@@ -49,8 +51,12 @@ public class EnemyOne implements SceneObjects, Enemy {
 
     @Override
     public void animateBody() {
-        if(body.equals(bodyOne)){
-            body = bodyTwo;
-        } else body = bodyOne;
+        if(currentAnimation == animationEveryNmove) {
+            if (body.equals(bodyOne) && currentAnimation == animationEveryNmove) {
+                body = bodyTwo;
+                currentAnimation = 0;
+            } else body = bodyOne;
+            currentAnimation = 0;
+        } else currentAnimation++;
     }
 }

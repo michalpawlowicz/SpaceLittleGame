@@ -3,42 +3,39 @@ package model.engine.navigation;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.screen.Screen;
 
-import java.io.IOException;
-
 /**
  * Created by michal on 07.12.16.
  */
 public class KeysListenerThread extends Thread {
     private boolean isListening;
     private Screen screen;
-    private KeysEvent keysEvent;
-    public KeysListenerThread(Screen screen, KeysEvent keysEvent){
+    private KeysAction keysAction;
+    public KeysListenerThread(Screen screen, KeysAction keysAction){
         super();
         this.screen = screen;
-        this.keysEvent = keysEvent;
+        this.keysAction = keysAction;
         isListening = false;
     }
     @Override
     public void run() {
-        //try {
             Key k = null;
             while (isListening){
                 k = (Key) screen.readInput();
                 if(k != null) {
                     if (k.getKind() == Key.Kind.ArrowLeft) {
-                        keysEvent.leftArrowAction();
+                        keysAction.leftArrowAction();
                     } else if (k.getKind() == Key.Kind.ArrowRight) {
-                        keysEvent.rightarrowAction();
+                        keysAction.rightarrowAction();
                     } else if (k.getKind() == Key.Kind.ArrowUp) {
-                        keysEvent.arrowUpAction();
+                        keysAction.arrowUpAction();
                     } else if (k.getKind() == Key.Kind.Escape) {
-                        keysEvent.EscAction();
+                        keysAction.EscAction();
                     } else if (k.getKind() == Key.Kind.EOF) {
-                        keysEvent.eofAction();
+                        keysAction.eofAction();
                     } else if (k.getKind() == Key.Kind.ArrowDown) {
-                        keysEvent.arrowDownAction();
+                        keysAction.arrowDownAction();
                     } else if (k.getKind() == Key.Kind.Enter) {
-                        keysEvent.enterKeyAction();
+                        keysAction.enterKeyAction();
                     }
                     k = null;
                 }
@@ -47,7 +44,7 @@ public class KeysListenerThread extends Thread {
          //   e.printStackTrace();
         //}
     }
-    public synchronized void setKeysEvents(KeysEvent keysEvents){ this.keysEvent = keysEvents; }
+    public synchronized void setKeysEvents(KeysAction keysEvents){ this.keysAction = keysEvents; }
     public synchronized void stopListening(){
         isListening = false;
     }

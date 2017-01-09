@@ -1,7 +1,6 @@
-import model.CouldNotCreateGameWindow;
-import model.engine.CouldNotStartWindowException;
+import exceptions.CouldNotCreateGameWindow;
+import exceptions.CouldNotStartWindowException;
 import view.Aplication;
-import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) {

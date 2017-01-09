@@ -31,8 +31,7 @@ public class StartScene implements Scene {
                 resolution.getRows()/2-1));
     }
     @Override
-    //synchronized?
-    public List<List<SceneObjects>> returnSceneObjects() {
+    public synchronized List<List<SceneObjects>> returnSceneObjects() {
         List<List<SceneObjects>> list = new LinkedList<>();
         list.add(buttonBar.getButtonBarObjects());
         return list;
