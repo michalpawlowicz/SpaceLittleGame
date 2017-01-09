@@ -1,4 +1,4 @@
-package model.engine;
+package exceptions;
 
 /**
  * Created by michal on 08.01.17.

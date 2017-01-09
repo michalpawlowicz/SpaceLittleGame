@@ -18,10 +18,4 @@ public class Pixel {
     public int getY(){ return y; }
     public void addX(int i){ x = x + i; }
     public void addY(int i){ y = y + i; }
-
-    /**
-     * Created by michal on 20.12.16.
-     */
-    public static class BottomBar {
-    }
 }

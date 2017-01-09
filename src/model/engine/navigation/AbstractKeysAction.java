@@ -1,11 +1,9 @@
 package model.engine.navigation;
 
-import java.io.IOException;
-
 /**
  * Created by michal on 07.01.17.
  */
-public class AbstractCKeysEvent implements KeysEvent {
+public class AbstractKeysAction implements KeysAction {
     @Override
     public void leftArrowAction() {}
     @Override

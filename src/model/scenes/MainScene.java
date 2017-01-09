@@ -1,7 +1,7 @@
 package model.scenes;
 
 import com.googlecode.lanterna.terminal.TerminalSize;
-import model.engine.CouldNotFindSound;
+import exceptions.CouldNotFindSound;
 import model.engine.MySound;
 import model.engine.drawing.CollisionAction;
 import model.engine.drawing.Collisions;
