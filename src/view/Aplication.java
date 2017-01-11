@@ -21,7 +21,7 @@ import model.scenes.StartScene;
 import java.io.File;
 import java.io.IOException;
 
-public class Aplication {
+public class  Aplication {
     private TerminalSize defaultTerminalSize;
     private KeysListenerThread keysListenersThread;
     private GameWindow gameWindow;
